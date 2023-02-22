@@ -1,0 +1,71 @@
+// FONT
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Orbitron:wght@400;600&display=swap');
+// font-family: 'Abril Fatface', cursive;
+// font-family: 'Orbitron', sans-serif;
+
+// RESET
+@import "reset";
+
+
+// MAIN
+body {
+  font: 16px/1 "Orbitron";
+}
+
+figure {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(25deg, rgb(56, 34, 222), rgb(202, 180, 220));
+  // linear : 등속 (일정한 속도)
+
+
+  h1 {
+    position: absolute;
+    top: 7vh;
+    left: 4vw;
+    font-size: 0;
+
+    strong {
+      font: bold 40px/1.4 "Orbitron";
+      color: #f3e4f8;
+      letter-spacing: 1px;
+    }
+
+    span {
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 30px;
+      color: #ece1f3;
+      letter-spacing: 1px;
+
+    }
+  }
+
+  .menu {
+    position: absolute;
+    top: 8vh;
+    right: 4vw;
+    font-size: 30px;
+    color: #fff;
+  }
+
+
+  // PANEL
+  @import "panel";
+  // BTNS
+  @import "btns";
+
+
+  // footer는 직계 선택자로
+  >p {
+    position: absolute;
+    bottom: 7vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px/1;
+    color: #fff;
+  }
+}
