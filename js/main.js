@@ -15,6 +15,16 @@ for (let i = 0; i < len; i++) {
   // 사진 부분 일괄 적용
   const pic = articleArr[i].querySelector(".pic");
   pic.style.backgroundImage = `url("../img/${names[i]}.jpg")`;
+
+  // 음악 제목 일괄 적용
+  const title = articleArr[i].querySelector(".text>h2");
+  title.innerHTML = `${names[i]}`;
+
+  // 음악 태그 & 파일 일괄 적용
+  const audio = document.createElement("audio");
+  audio.setAttribute("src", `../music/${names[i]}.mp3`);
+  audio.setAttribute("loop", "loop");
+  articleArr[i].append(audio);
 }
 
 // Prev, Next 버튼 액션 처리
@@ -53,3 +63,43 @@ next.addEventListener("click", function () {
   }
   articleArr[active].classList.add("on");
 });
+
+// CD 모양 사진 회전
+let before = 0; // 이전 패널 위치 기억용 변수
+
+for (let el of articleArr) {
+  const play = el.querySelector(".play");
+  const pause = el.querySelector(".pause");
+  const reload = el.querySelector(".reload");
+
+  play.addEventListener("click", function (e) {
+    if (before === 0) { // 페이지가 처음 로딩 되었을 때
+      before = e.target; // 클릭된 위치를 기억시켜주는 것
+    } else if (before !== e.target) {
+      before.closest("article").querySelector(".pic").classList.remove("on");
+      before.closest("article").querySelector("audio").pause();
+      before = e.target;
+    }
+    // e.target.closest("article").querySelector(".pic").classList.add("on");
+    el.querySelector(".pic").classList.add("on");
+    el.querySelector("audio").play();
+  });
+
+  pause.addEventListener("click", function (e) {
+    e.target.closest("article").querySelector(".pic").classList.remove("on");
+    e.target.closest("article").querySelector("audio").pause();
+  });
+
+  reload.addEventListener("click", function (e) {
+    if (before === 0) { // 페이지가 처음 로딩 되었을 때
+      before = e.target; // 클릭된 위치를 기억시켜주는 것
+    } else if (before !== e.target) {
+      before.closest("article").querySelector(".pic").classList.remove("on");
+      before.closest("article").querySelector("audio").pause();
+      before = e.target;
+    }
+    el.querySelector(".pic").classList.add("on");
+    el.querySelector("audio").load();
+    el.querySelector("audio").play();
+  })
+}
